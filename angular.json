@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "projects": {
+    "embarshop": {
+      "projectType": "application",
+      "root": "apps/embarshop",
+      "sourceRoot": "apps/embarshop/src",
+      "prefix": "eshop-front",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/embarshop",
+            "index": "apps/embarshop/src/index.html",
+            "main": "apps/embarshop/src/main.ts",
+            "polyfills": "apps/embarshop/src/polyfills.ts",
+            "tsConfig": "apps/embarshop/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/embarshop/src/favicon.ico",
+              "apps/embarshop/src/assets"
+            ],
+            "styles": ["apps/embarshop/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/embarshop/src/environments/environment.ts",
+                  "with": "apps/embarshop/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "embarshop:build:production"
+            },
+            "development": {
+              "browserTarget": "embarshop:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "embarshop:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/embarshop/src/**/*.ts",
+              "apps/embarshop/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/embarshop"],
+          "options": {
+            "jestConfig": "apps/embarshop/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "tags": []
+    },
+    "embarshop-e2e": {
+      "root": "apps/embarshop-e2e",
+      "sourceRoot": "apps/embarshop-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/embarshop-e2e/cypress.json",
+            "devServerTarget": "embarshop:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "embarshop:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/embarshop-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "tags": [],
+      "implicitDependencies": ["embarshop"]
+    }
+  }
+}
