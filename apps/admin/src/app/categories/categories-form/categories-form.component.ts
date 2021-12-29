@@ -28,7 +28,8 @@ export class CategoriesFormComponent implements OnInit {
   ngOnInit(): void {
     this.form = this.formbuilder.group({
       name:['', Validators.required],
-      icon:['', Validators.required]
+      icon:['', Validators.required],
+      color: ['#ffffff']
     });
 
     this._checkEditMode();
@@ -41,7 +42,8 @@ export class CategoriesFormComponent implements OnInit {
     const category: Category = {
       id: this.currentCategoryId,
       name: this.categoryForm.name.value,
-      icon: this.categoryForm.icon.value
+      icon: this.categoryForm.icon.value,
+      color: this.categoryForm.color.value
     }
 
     if(this.editmode){
@@ -55,37 +57,23 @@ export class CategoriesFormComponent implements OnInit {
   private _addCategory(category: Category) {
     this.categoriesService.createCategory(category).subscribe(
       {
-        next : (v) => this.messageService.add({ severity:'success', summary:'Success', detail:'Catefory is created!'}),
+        next : (categ: Category) => this.messageService.add({ severity:'success', summary:'Success', detail:`Catefory ${categ.name} is created!`}),
         error : (e) => this.messageService.add({ severity:'error', summary:'Error', detail:'Catefory is NOT created!'}),
         // complete: () => timer(2000).toPromise().then(done => { this.location.back();}) toPromise is deprecated
-        complete: () => firstValueFrom(timer(2000)).then(done => { this.location.back();})
+        complete: () => firstValueFrom(timer(2000)).then(() => { this.location.back();})
       }
-    //   (response) => {
-    //   this.messageService.add({
-    //     severity:'success',
-    //     summary:'Success',
-    //     detail:'Catefory is created!'
-    //   });
-    //   timer(2000).toPromise().then(done => {
-    //     this.location.back();
-    //   })
-    // },
-    // (error)=>{
-    //   this.messageService.add({
-    //     severity:'error',
-    //     summary:'Error',
-    //     detail:`Category is not created!`
-    //   });
-    // }
+    // (response) => { this.messageService.add({ severity:'success', summary:'Success', detail:'Catefory is created!'});
+    // timer(2000).toPromise().then(done => { this.location.back();})},
+    // (error)=>{ this.messageService.add({ severity:'error', summary:'Error', detail:`Category is not created!`});}
     );
   }
 
   private _updateCategory(category: Category) {
     this.categoriesService.updateCategory(category).subscribe(
       {
-        next : (v) => this.messageService.add({ severity:'success', summary:'Success', detail:'Catefory is updated!'}),
+        next : (categ: Category) => this.messageService.add({ severity:'success', summary:'Success', detail:`Catefory ${categ.name} is updated!`}),
         error : (e) => this.messageService.add({ severity:'error', summary:'Error', detail:'Catefory is NOT updated!'}),
-        complete: () => firstValueFrom(timer(2000)).then(done => { this.location.back();})
+        complete: () => firstValueFrom(timer(2000)).then(() => { this.location.back();})
       }
     );
   }
@@ -101,6 +89,7 @@ export class CategoriesFormComponent implements OnInit {
             next: (c) => {
               this.categoryForm.name.setValue(c.name);
               this.categoryForm.icon.setValue(c.icon);
+              this.categoryForm.color.setValue(c.color);
             }
           })
         }
