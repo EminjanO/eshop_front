@@ -51,9 +51,12 @@ export class CategoriesFormComponent implements OnInit {
     }else{
       this._addCategory(category);
     }
+  }
 
+  onCancel(){
 
   }
+
   private _addCategory(category: Category) {
     this.categoriesService.createCategory(category).subscribe(
       {
