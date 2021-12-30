@@ -10,7 +10,7 @@ import { firstValueFrom, timer } from 'rxjs';
   templateUrl: './categories-list.component.html',
   styles: []
 })
-export class CategoriesComponent implements OnInit {
+export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
 
   constructor( private messageService: MessageService,
