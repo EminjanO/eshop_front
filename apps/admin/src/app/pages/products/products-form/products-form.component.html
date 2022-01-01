@@ -38,19 +38,19 @@
             </div>
             <div class="p-field col">
               <label for="price">Price</label>
-              <p-inputNumber formControlName="price" mode="decimal" inputId="withoutgrouping" [useGrouping]="false"></p-inputNumber>
+              <p-inputNumber formControlName="price" mode="currency" currency="EUR" locale="de-DE"  [useGrouping]="false"></p-inputNumber>
               <small *ngIf="productForm.price.invalid && isSubmitted" class="p-error">Price is required</small>
             </div>
         </div>
         <div class="p-fluid p-formgrid grid">
           <div class="p-field col-4">
             <label for="countInStock">Count In Stock</label>
-            <p-inputNumber formControlName="countInStock" mode="decimal" inputId="withoutgrouping" [useGrouping]="false"></p-inputNumber>
+            <p-inputNumber formControlName="countInStock" inputId="integeronly" inputId="withoutgrouping" [useGrouping]="false"></p-inputNumber>
             <small *ngIf="productForm.countInStock.invalid && isSubmitted" class="p-error">Count In Stock is required</small>
           </div>
           <div class="p-field col-4">
             <label for="category">Category</label>
-            <p-dropdown [options]="categories" formControlName="category" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Category"></p-dropdown>
+            <p-dropdown [options]="categories" formControlName="category" optionLabel="name" optionValue="id" [filter]="true" filterBy="name" [showClear]="true" placeholder="Select a Category"></p-dropdown>
             <small *ngIf="productForm.category.invalid && isSubmitted" class="p-error"> Category is required</small>
           </div>
           <div class="p-field col-4">
@@ -59,7 +59,7 @@
           </div>
           <div class="p-field col-12">
             <label for="description">Description</label>
-            <textarea pInputTextarea formControlName="description" [rows]="7" [cols]="30"></textarea>
+            <textarea  formControlName="description" [rows]="7" [cols]="30" pInputTextarea></textarea>
             <small *ngIf="productForm.description.invalid && isSubmitted" class="p-error">Description is required</small>
           </div>
           <div class="p-field col-12">

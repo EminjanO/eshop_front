@@ -20,9 +20,10 @@ export class ProductsService {
   //   return this.http.get<Product>(`${this.apiUrlProducts}/${productId}`);
   // }
 
-  // createProduct(product: Product): Observable<Product> {
-  //   return this.http.post<Product>(`${this.apiUrlProducts}`, product);
-  // }
+  createProduct(productData: FormData): Observable<Product> {
+    console.log(productData.get('name'), 'oh lala')
+    return this.http.post<Product>(this.apiUrlProducts, productData);
+  }
 
   // updateProduct(product: Product): Observable<Product> {
   //   return this.http.put<Product>(`${this.apiUrlProducts}/${product.id}`, product);

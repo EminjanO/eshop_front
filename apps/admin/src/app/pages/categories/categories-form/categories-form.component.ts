@@ -19,11 +19,13 @@ export class CategoriesFormComponent implements OnInit {
   editmode = false;
   currentCategoryId!: string;
 
-  constructor(private messageService: MessageService,
+  constructor(
+    private messageService: MessageService,
     private formbuilder: FormBuilder,
     private categoriesService: CategoriesService,
     private location: Location,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+    ) { }
 
   ngOnInit(): void {
     this.form = this.formbuilder.group({
