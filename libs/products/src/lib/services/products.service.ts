@@ -16,21 +16,20 @@ export class ProductsService {
     return this.http.get<Product[]>(this.apiUrlProducts);
   }
 
-  // getProduct(productId : string): Observable<Product>{
-  //   return this.http.get<Product>(`${this.apiUrlProducts}/${productId}`);
-  // }
-
   createProduct(productData: FormData): Observable<Product> {
-    console.log(productData.get('name'), 'oh lala')
     return this.http.post<Product>(this.apiUrlProducts, productData);
   }
 
-  // updateProduct(product: Product): Observable<Product> {
-  //   return this.http.put<Product>(`${this.apiUrlProducts}/${product.id}`, product);
-  // }
+  getProduct(productId : string): Observable<Product>{
+    return this.http.get<Product>(`${this.apiUrlProducts}/${productId}`);
+  }
 
-  // deleteProduct(productId: string): Observable<unknown>{
-  //   return this.http.delete<unknown>(`${this.apiUrlProducts}/${productId}`);
-  // }
+  updateProduct(productData: FormData, productId : string): Observable<Product> {
+    return this.http.put<Product>(`${this.apiUrlProducts}/${productId}`, productData);
+  }
+
+  deleteProduct(productId: string): Observable<unknown>{
+    return this.http.delete<unknown>(`${this.apiUrlProducts}/${productId}`);
+  }
 
 }

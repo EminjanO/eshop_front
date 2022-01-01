@@ -13,10 +13,12 @@ import { firstValueFrom, timer } from 'rxjs';
 export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
 
-  constructor( private messageService: MessageService,
+  constructor(
+    private messageService: MessageService,
     private categoriesService: CategoriesService,
     private confirmationService: ConfirmationService,
-    private router: Router) { }
+    private router: Router
+    ) { }
 
   ngOnInit(): void {
     this._getCategories();
