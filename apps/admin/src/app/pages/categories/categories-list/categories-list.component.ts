@@ -31,7 +31,10 @@ export class CategoriesListComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         this.categoriesService.deleteCategory(categoryId).subscribe({
-          next : (v) => {this.messageService.add({ severity:'success', summary:'Success', detail:'Catefory is deleted!'}); this._getCategories(); },
+          next : (v) => {
+            this._getCategories();
+            this.messageService.add({ severity:'success', summary:'Success', detail:'Catefory is deleted!'});
+          },
           error : (e) => this.messageService.add({ severity:'error', summary:'Error', detail:'Catefory is NOT deleted!'}),
           // complete: () => timer(2000).toPromise().then(done => { this.location.back();}) toPromise is deprecated
         });
