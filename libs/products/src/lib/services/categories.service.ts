@@ -8,27 +8,27 @@ import { environment } from '@env/environment';
   providedIn: 'root'
 })
 export class CategoriesService {
-  apiUrlProducts = environment.apiUrl + 'categories';
+  apiUrlCategories = environment.apiUrl + 'categories';
 
   constructor(private http: HttpClient) { }
 
   getCategories(): Observable<Category[]>{
-    return this.http.get<Category[]>(this.apiUrlProducts);
+    return this.http.get<Category[]>(this.apiUrlCategories);
   }
 
   getCategory(categoryId : string): Observable<Category>{
-    return this.http.get<Category>(`${this.apiUrlProducts}/${categoryId}`);
+    return this.http.get<Category>(`${this.apiUrlCategories}/${categoryId}`);
   }
 
   createCategory(category: Category): Observable<Category> {
-    return this.http.post<Category>(`${this.apiUrlProducts}`, category);
+    return this.http.post<Category>(`${this.apiUrlCategories}`, category);
   }
 
   updateCategory(category: Category): Observable<Category> {
-    return this.http.put<Category>(`${this.apiUrlProducts}/${category.id}`, category);
+    return this.http.put<Category>(`${this.apiUrlCategories}/${category.id}`, category);
   }
 
   deleteCategory(categoryId: string): Observable<unknown>{
-    return this.http.delete<unknown>(`${this.apiUrlProducts}/${categoryId}`);
+    return this.http.delete<unknown>(`${this.apiUrlCategories}/${categoryId}`);
   }
 }
