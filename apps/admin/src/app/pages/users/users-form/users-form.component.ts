@@ -81,7 +81,7 @@ export class UsersFormComponent implements OnInit {
   }
 
   onCancel(){
-
+    this.location.back();
   }
 
   private _addUser(user: User) {

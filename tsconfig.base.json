@@ -19,7 +19,7 @@
       "@eshop-front/products": ["libs/products/src/index.ts"],
       "@eshop-front/ui": ["libs/ui/src/index.ts"],
       "@eshop-front/users": ["libs/users/src/index.ts"],
-      "@env/*": ["apps/admin/src/environments/*"]
+      "@env/*": ["environments/*"]
     }
   },
   "exclude": ["node_modules", "tmp"]

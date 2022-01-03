@@ -96,7 +96,7 @@ export class ProductsFormComponent implements OnInit {
 
 
   onCancel(){
-
+    this.location.back();
   }
 
   onImageUpload(event: any){
