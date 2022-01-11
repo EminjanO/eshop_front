@@ -11,24 +11,18 @@
           {
             "enforceBuildableLibDependency": true,
             "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
-            ]
+            "depConstraints": [{ "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }]
           }
-        ]
+        ],
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": "off"
       }
     },
     {
       "files": ["*.ts", "*.tsx"],
       "extends": ["plugin:@nrwl/nx/typescript"],
-      "rules": {
-        // note you must disable the base rule as it can report incorrect errors
-        "no-empty-function": "off",
-        "@typescript-eslint/no-empty-function": "off"
-      }
+      "parserOptions": { "project": "./tsconfig.*?.json" },
+      "rules": {}
     },
     {
       "files": ["*.js", "*.jsx"],

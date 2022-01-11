@@ -8,27 +8,27 @@ import { environment } from '@env/environment';
   providedIn: 'root'
 })
 export class CategoriesService {
-  apiUrlCategories = environment.apiUrl + 'categories';
+  apiURLCategories = environment.apiUrl + 'categories';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getCategories(): Observable<Category[]>{
-    return this.http.get<Category[]>(this.apiUrlCategories);
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(this.apiURLCategories);
   }
 
-  getCategory(categoryId : string): Observable<Category>{
-    return this.http.get<Category>(`${this.apiUrlCategories}/${categoryId}`);
+  getCategory(categoryId: string): Observable<Category> {
+    return this.http.get<Category>(`${this.apiURLCategories}/${categoryId}`);
   }
 
   createCategory(category: Category): Observable<Category> {
-    return this.http.post<Category>(`${this.apiUrlCategories}`, category);
+    return this.http.post<Category>(this.apiURLCategories, category);
   }
 
   updateCategory(category: Category): Observable<Category> {
-    return this.http.put<Category>(`${this.apiUrlCategories}/${category.id}`, category);
+    return this.http.put<Category>(`${this.apiURLCategories}/${category.id}`, category);
   }
 
-  deleteCategory(categoryId: string): Observable<unknown>{
-    return this.http.delete<unknown>(`${this.apiUrlCategories}/${categoryId}`);
+  deleteCategory(categoryId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiURLCategories}/${categoryId}`);
   }
 }

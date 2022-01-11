@@ -1,10 +1,7 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CategoriesService, Category } from '@eshop-front/products'
+import { CategoriesService, Category } from '@bluebits/products';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { firstValueFrom, timer } from 'rxjs';
-
 @Component({
   selector: 'admin-categories-list',
   templateUrl: './categories-list.component.html',
@@ -14,42 +11,50 @@ export class CategoriesListComponent implements OnInit {
   categories: Category[] = [];
 
   constructor(
-    private messageService: MessageService,
     private categoriesService: CategoriesService,
+    private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private router: Router
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this._getCategories();
   }
 
-  deleteCategory(categoryId: string){
+  deleteCategory(categoryId: string) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to Delete?',
+      message: 'Do you want to Delete this Category?',
       header: 'Delete Category',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.categoriesService.deleteCategory(categoryId).subscribe({
-          next : (v) => {
+        this.categoriesService.deleteCategory(categoryId).subscribe(
+          () => {
             this._getCategories();
-            this.messageService.add({ severity:'success', summary:'Success', detail:'Catefory is deleted!'});
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Category is deleted!'
+            });
           },
-          error : (e) => this.messageService.add({ severity:'error', summary:'Error', detail:'Catefory is NOT deleted!'}),
-          // complete: () => timer(2000).toPromise().then(done => { this.location.back();}) toPromise is deprecated
-        });
-      },
-      reject: () => {}
+          () => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Category is not deleted!'
+            });
+          }
+        );
+      }
     });
   }
 
-  updateCategory(categoryId: string){
-    this.router.navigateByUrl(`categories/form/${categoryId}`)
+  updateCategory(categoryid: string) {
+    this.router.navigateByUrl(`categories/form/${categoryid}`);
   }
 
-  private _getCategories(){
-    this.categoriesService.getCategories().subscribe(cats => {
+  private _getCategories() {
+    this.categoriesService.getCategories().subscribe((cats) => {
       this.categories = cats;
-    })
+    });
   }
 }

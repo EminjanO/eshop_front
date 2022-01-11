@@ -1,59 +1,65 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, UsersService } from '@eshop-front/users'
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { User, UsersService } from '@bluebits/users';
 
 @Component({
   selector: 'admin-users-list',
   templateUrl: './users-list.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class UsersListComponent implements OnInit {
   users: User[] = [];
 
   constructor(
-    private messageService: MessageService,
     private usersService: UsersService,
+    private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private router: Router
-    ) { }
+  ) {}
 
   ngOnInit(): void {
     this._getUsers();
   }
 
-  deleteUser(userId: string){
+  deleteUser(userId: string) {
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to Delete?',
-      header: 'Delete Category',
+      message: 'Do you want to Delete this User?',
+      header: 'Delete User',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.usersService.deleteUser(userId).subscribe({
-          next : (v) => {
+        this.usersService.deleteUser(userId).subscribe(
+          () => {
             this._getUsers();
-            this.messageService.add({ severity:'success', summary:'Success', detail:'User is deleted!'});
-        },
-          error : (e) => this.messageService.add({ severity:'error', summary:'Error', detail:'User is NOT deleted!'}),
-          // complete: () => timer(2000).toPromise().then(done => { this.location.back();}) toPromise is deprecated
-        });
-      },
-      reject: () => {}
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'User is deleted!'
+            });
+          },
+          () => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'User is not deleted!'
+            });
+          }
+        );
+      }
     });
   }
 
-  updateUser(userId: string){
-    this.router.navigateByUrl(`users/form/${userId}`)
+  updateUser(userid: string) {
+    this.router.navigateByUrl(`users/form/${userid}`);
   }
 
-  getCountryName(countryKey: string){
-    if(countryKey) return this.usersService.getCountry(countryKey);
-    return "";
+  getCountryName(countryKey: string) {
+    if (countryKey) return this.usersService.getCountry(countryKey);
   }
 
-  private _getUsers(){
-    this.usersService.getUsers().subscribe(users => {
+  private _getUsers() {
+    this.usersService.getUsers().subscribe((users) => {
       this.users = users;
-    })
+    });
   }
 }

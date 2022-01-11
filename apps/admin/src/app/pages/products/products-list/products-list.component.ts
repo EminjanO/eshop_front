@@ -1,54 +1,61 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product, ProductsService } from '@eshop-front/products';
+import { ProductsService } from '@bluebits/products';
 import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'admin-products-list',
   templateUrl: './products-list.component.html',
-  styles: [
-  ]
+  styles: []
 })
 export class ProductsListComponent implements OnInit {
-  products : Product[] = [];
+  products = [];
 
   constructor(
-    private messageService: MessageService,
-    private productService : ProductsService,
+    private productsService: ProductsService,
     private router: Router,
+    private messageService: MessageService,
     private confirmationService: ConfirmationService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this._getProducts();
   }
 
   private _getProducts() {
-    this.productService.getProducts().subscribe(
-      {
-        next: (products) => {this.products = products}
-      }
-    )
-  }
-
-  deleteProduct(productId : string){
-    this.confirmationService.confirm({
-      message: 'Are you sure that you want to Delete?',
-      header: 'Delete Product',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        this.productService.deleteProduct(productId).subscribe({
-          next : (v) => {this.messageService.add({ severity:'success', summary:'Success', detail:'Catefory is deleted!'}); this._getProducts(); },
-          error : (e) => this.messageService.add({ severity:'error', summary:'Error', detail:'Catefory is NOT deleted!'}),
-          // complete: () => timer(2000).toPromise().then(done => { this.location.back();}) toPromise is deprecated
-        });
-      },
-      reject: () => {}
+    this.productsService.getProducts().subscribe((products) => {
+      this.products = products;
     });
   }
 
-  updateProduct(productId : string){
-    this.router.navigateByUrl(`products/form/${productId}`)
+  updateProduct(productid: string) {
+    this.router.navigateByUrl(`products/form/${productid}`);
   }
 
+  deleteProduct(productId: string) {
+    this.confirmationService.confirm({
+      message: 'Do you want to delete this Product?',
+      header: 'Delete Product',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.productsService.deleteProduct(productId).subscribe(
+          () => {
+            this._getProducts();
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Success',
+              detail: 'Product is deleted!'
+            });
+          },
+          () => {
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Error',
+              detail: 'Product is not deleted!'
+            });
+          }
+        );
+      }
+    });
+  }
 }

@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@eshop-front/orders": ["libs/orders/src/index.ts"],
-      "@eshop-front/products": ["libs/products/src/index.ts"],
-      "@eshop-front/ui": ["libs/ui/src/index.ts"],
-      "@eshop-front/users": ["libs/users/src/index.ts"],
+      "@bluebits/ui": ["libs/ui/src/index.ts"],
+      "@bluebits/orders": ["libs/orders/src/index.ts"],
+      "@bluebits/products": ["libs/products/src/index.ts"],
+      "@bluebits/users": ["libs/users/src/index.ts"],
       "@env/*": ["environments/*"]
     }
   },

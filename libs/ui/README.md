@@ -1,11 +1,6 @@
 # ui
 
-This library contains the ui components which are used in the company
-
-# Banner 
-# Slider 
-# Carousel / Stepper
-# Services For Data
+This library was generated with [Nx](https://nx.dev).
 
 ## Running unit tests
 

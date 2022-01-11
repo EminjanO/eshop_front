@@ -1,9 +1,9 @@
-import { User } from "@eshop-front/users";
-import { OrderItem } from "./order-item";
+import { OrderItem } from './order-item';
+import { User } from '@bluebits/users';
 
-export class Order{
+export class Order {
   id?: string;
-  public orderItems?: OrderItem[];
+  orderItems?: OrderItem;
   shippingAddress1?: string;
   shippingAddress2?: string;
   city?: string;

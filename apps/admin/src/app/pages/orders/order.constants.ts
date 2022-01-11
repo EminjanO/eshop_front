@@ -1,5 +1,5 @@
-export const ORDER_STATUS : any = {
-  0 : {
+export const ORDER_STATUS = {
+  0: {
     label: 'Pending',
     color: 'primary'
   },
@@ -8,10 +8,10 @@ export const ORDER_STATUS : any = {
     color: 'warning'
   },
   2: {
-    label: 'Shipping',
+    label: 'Shipped',
     color: 'warning'
   },
-  3 : {
+  3: {
     label: 'Delivered',
     color: 'success'
   },
@@ -19,4 +19,4 @@ export const ORDER_STATUS : any = {
     label: 'Failed',
     color: 'danger'
   }
-}
+};

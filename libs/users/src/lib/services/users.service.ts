@@ -2,56 +2,50 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from '../models/user';
-import * as countriesLib from 'i18n-iso-countries'
 import { environment } from '@env/environment';
-
-declare const require: any;
+import * as countriesLib from 'i18n-iso-countries';
+declare const require;
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  apiUrUsers = environment.apiUrl + 'users';
+  apiURLUsers = environment.apiUrl + 'users';
 
   constructor(private http: HttpClient) {
-    // eslint-disable-next-line @typescript-eslint/no-var-requires
-    countriesLib.registerLocale(require('i18n-iso-countries/langs/en.json'))
-   }
-
-  getUsers(): Observable<User[]>{
-    return this.http.get<User[]>(this.apiUrUsers);
+    countriesLib.registerLocale(require('i18n-iso-countries/langs/en.json'));
   }
 
-  getUser(userId : string): Observable<User>{
-    return this.http.get<User>(`${this.apiUrUsers}/${userId}`);
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(this.apiURLUsers);
+  }
+
+  getUser(userId: string): Observable<User> {
+    return this.http.get<User>(`${this.apiURLUsers}/${userId}`);
   }
 
   createUser(user: User): Observable<User> {
-    console.log(user)
-    return this.http.post<User>(`${this.apiUrUsers}`, user);
+    return this.http.post<User>(this.apiURLUsers, user);
   }
 
   updateUser(user: User): Observable<User> {
-    console.log(user)
-    return this.http.put<User>(`${this.apiUrUsers}/${user.id}`, user);
+    return this.http.put<User>(`${this.apiURLUsers}/${user.id}`, user);
   }
 
-  deleteUser(userId: string): Observable<unknown>{
-    return this.http.delete<unknown>(`${this.apiUrUsers}/${userId}`);
+  deleteUser(userId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiURLUsers}/${userId}`);
   }
 
-  getCountry(countryKey: string): string{
+  getCountries(): { id: string; name: string }[] {
+    return Object.entries(countriesLib.getNames('en', { select: 'official' })).map((entry) => {
+      return {
+        id: entry[0],
+        name: entry[1]
+      };
+    });
+  }
+
+  getCountry(countryKey: string): string {
     return countriesLib.getName(countryKey, 'en');
-  }
-
-  getCountries(): {id: string, name: string}[] {
-    return Object.entries(countriesLib.getNames("en", {select: "official"})).map(
-      (entry)=>{
-        return {
-          id: entry[0],
-          name: entry[1]
-        }
-      }
-    );
   }
 }

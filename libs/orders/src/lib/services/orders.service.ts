@@ -8,27 +8,27 @@ import { environment } from '@env/environment';
   providedIn: 'root'
 })
 export class OrdersService {
-  apiUrlOrders = environment.apiUrl + 'orders';
+  apiURLOrders = environment.apiUrl + 'orders';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getOrders(): Observable<Order[]>{
-    return this.http.get<Order[]>(this.apiUrlOrders);
+  getOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>(this.apiURLOrders);
   }
 
-  getOrder(orderId : string): Observable<Order>{
-    return this.http.get<Order>(`${this.apiUrlOrders}/${orderId}`);
+  getOrder(orderId: string): Observable<Order> {
+    return this.http.get<Order>(`${this.apiURLOrders}/${orderId}`);
   }
 
   createOrder(order: Order): Observable<Order> {
-    return this.http.post<Order>(`${this.apiUrlOrders}`, order);
+    return this.http.post<Order>(this.apiURLOrders, order);
   }
 
-  updateOrder(orderStaus: { status: string }, orderId: string | undefined): Observable<Order> {
-    return this.http.put<Order>(`${this.apiUrlOrders}/${orderId}`, orderStaus);
+  updateOrder(orderStaus: { status: string }, orderId: string): Observable<Order> {
+    return this.http.put<Order>(`${this.apiURLOrders}/${orderId}`, orderStaus);
   }
 
-  deleteOrder(orderId: string ): Observable<unknown>{
-    return this.http.delete<unknown>(`${this.apiUrlOrders}/${orderId}`);
+  deleteOrder(orderId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiURLOrders}/${orderId}`);
   }
 }
