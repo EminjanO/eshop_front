@@ -9,12 +9,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { ProductsModule } from '@bluebits/products';
+import { UiModule } from '@bluebits/ui';
 
 import { AccordionModule } from 'primeng/accordion';
+import { NavComponent } from './shared/nav/nav.component';
 
 const routes: Routes = [
   { path: '', component: HomePageComponent },
-  { path: 'products', component: ProductListComponent },
+  { path: 'products', component: ProductListComponent }
 ];
 
 @NgModule({
@@ -24,6 +26,7 @@ const routes: Routes = [
     ProductListComponent,
     HeaderComponent,
     FooterComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
@@ -31,8 +34,9 @@ const routes: Routes = [
     ProductsModule,
     AccordionModule,
     BrowserAnimationsModule,
+    UiModule
   ],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}

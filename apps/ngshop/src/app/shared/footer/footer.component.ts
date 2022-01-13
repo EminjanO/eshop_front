@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ngshop-footer',
-  templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  selector: 'bluebits-footer',
+  templateUrl: './footer.component.html'
 })
 export class FooterComponent implements OnInit {
   constructor() {}
