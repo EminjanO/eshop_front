@@ -25,4 +25,18 @@
     padding: 15px 0 0 0;
     text-align: center;
   }
+
+  &-button {
+    background-color: var(--surface-0);
+    color: $primary-color;
+    border: none;
+    border-radius: 13px;
+    height: 50px;
+
+    &:enabled:hover {
+      background-color: var(--surface-0);
+      color: $primary-color;
+      border: none;
+    }
+  }
 }
