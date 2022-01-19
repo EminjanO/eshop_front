@@ -19,8 +19,8 @@ export class ProductsListComponent implements OnInit {
     this._getCategories();
   }
 
-  private _getProducts() {
-    this.prodServices.getProducts().subscribe((resProducts) => {
+  private _getProducts(categoriesFilter?: string[]) {
+    this.prodServices.getProducts(categoriesFilter).subscribe((resProducts) => {
       this.products = resProducts;
     });
   }
@@ -29,5 +29,13 @@ export class ProductsListComponent implements OnInit {
     this.catServices.getCategories().subscribe((resCats) => {
       this.categories = resCats;
     });
+  }
+
+  categoryFilter() {
+    const selectedCategories = this.categories
+      .filter((category) => category.checked)
+      .map((category) => category.id);
+
+    this._getProducts(selectedCategories);
   }
 }
