@@ -1,12 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { CartService } from '@bluebits/orders';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'ngshop-header',
   templateUrl: './header.component.html'
 })
-export class HeaderComponent implements OnInit {
-  constructor() {}
-
-  ngOnInit(): void {}
-}
+export class HeaderComponent {}

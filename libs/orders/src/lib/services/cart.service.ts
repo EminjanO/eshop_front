@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Cart, CartItem, CartItemDetailed } from '../models/cart';
+import { Cart, CartItem } from '../models/cart';
 
 export const CART_KEY = 'cart';
 @Injectable({
